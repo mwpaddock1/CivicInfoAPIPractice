@@ -1,39 +1,39 @@
 <DOCTYPE html>
-<lang ='en'>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Congressperson Search API project</title>
-        <script
+<html lang ='en'>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Congressperson Search API project</title>
+    <script
           src="https://code.jquery.com/jquery-3.2.1.min.js"
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
           crossorigin="anonymous"></script>
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <link href="index.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="images">
-    </head>
-    <body>
-      <main>
-        <div class="description container">
-        </div>
-        <div class="search container">
-          <fieldset>
-            <legend><h1>Search Representatives by residential address</h1></legend>
-            <form action="#" name="rep-search" class="js-search-form">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="images">
+  </head>
+  <body>
+    <main>
+      <div class="search container">
+        <fieldset>
+          <legend><h1>Learn who your United States representatives are by inputting your 5-digit zip code:</h1></legend>
+          <form action="#" name="rep-search" class="js-search-form">
                        
-              <input type="text" name='address' class='js-query' placeholder="type your full address here"/><label for="address" class="input-label" required>Voter's Full Address</label> <br> 
-              <button type="submit">Lookup</button>
+              <input type="text" name='zipcode' class='js-query' placeholder="ex. 10022"/><label for="zipcode" class="input-label" required>ex. 10022</label> <br> 
+              <button type="submit">Lookup Representatives</button>
             
            </form>
          </fieldset>
-     </div>
+      </div>
      <!--<div class= "results container hidden">  -->        
-      <div class="js-search-results hidden">            
+      <div class="js-search-results hidden"> 
+        <row class="reps"> 
+        </row>          
       </div>
         
-      </main> 
+    </main> 
       <script src="https://code.jquery.com/jquery-3.2.1.js"></script>    
       <script src="index.js"></script>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
    </body>
 </html>

@@ -54,10 +54,13 @@ h2 {color: #D0D1DC;
   padding-left: 3%;
 }
 
+h3 {
+  font-size: 1.5em;
+}
+
 .container {
   background-color: #2A2544;
-  display: flex;
-  
+  display: flex;  
   text-align: center;
 }
 
@@ -71,11 +74,13 @@ h2 {color: #D0D1DC;
 .js-search-results {
   text-align: center;
   display: inline-flex;
+  width: 100%;
 }
 
 .reps {
   text-align: center;
   display: flex;
+  width: 100%;
 }
 
 .row {
@@ -85,18 +90,25 @@ h2 {color: #D0D1DC;
   justify-content: space-between;
 }
 
-
-
-.contact-info, .videos {
+.name-box1 {
+  padding-bottom: 1.2em;
+}
+.info-box, .tweets {
   background-color: #D0D1DC;
   color: #2A2544;
   text-align: center;
+  font-size: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.53em;
 }
+
 .col-4 {
      width: 95%;
      border: 2px solid red;
      flex-wrap: wrap;
-   }
+}
+
 /*For non-mobile devices*/
 @media only screen and (min-width: 640px) {
   .col-4 {

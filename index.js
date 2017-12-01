@@ -2,131 +2,116 @@
 
 const CONGRESSPERSON_SEARCH_URL = 'https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDmy5GqaG7XhLaYLbAUuoUqO4DRFT_Lgz4&address=';
 
-
 function handleForm() {
-  const addressForm = $('form[name=rep-search]');
-  const addressField = $('input[name=address]');
-
-  addressForm.on('submit', function(e) {
+  const zipcodeForm = $('form[name=rep-search]');
+  const zipcodeField = $('input[name=zipcode]');
+  
+  zipcodeForm.on('submit', function(e) {
     e.preventDefault();
 
     //hide the search form and display the results
      $('.search').addClass('hidden');
      $('.js-search-results').removeClass('hidden');
-    //get the address that was entered
+    //get the zipcode that was entered
 
-    const voterAddress = addressField.val();
+    const voterZipcode = zipcodeField.val();
 
     //pass it in along with the Congressperson endpoint
 
-    fetchData(CONGRESSPERSON_SEARCH_URL, voterAddress);
+    fetchData(CONGRESSPERSON_SEARCH_URL, voterZipcode);
     //reset the input
 
-    addressField.val('');
+    zipcodeField.val('');
 
   })
 }
 
-function fetchData(baseURL, address) {
+function fetchData(baseURL, zipcode) {
   //make the complete url by concatenating 
-  //the endpoint and the address together
+  //the endpoint and the zipcode together
 
-  const url = baseURL + address;
+  const url = baseURL + zipcode;
 
   //try to get some JSON
-  //adn show something to the user.
+  //and show something to the user.
   $.getJSON(url, showRepInfo)
-// ... and show an error if we can't
-    .fail(showErr);
+// ... and show an error if we can't 
+  .fail(showErr);
 }
 
+ 
 
 function showRepInfo(repData) {
   // store the element we'll be appending to
-
-  const outputResults= $('.js-search-results');
-
-  //store the parts we want from the data
+  const outputResults= $('row.reps');
+  
+ outputResults
+ .empty()
+   //store the parts we want from the data
   //using object destructuring
   let {officials, offices} = repData;
+  //Party: ${officials[2]["party"]}<br>
 
-  //if there's no official in the data, 
-  //we'll inform our user
+  
+   //for (let i = 0; i <=offices.length; i++) 
+  // //  let currentOffice = ${offices[i]["name"]}
+  // if (offices[name[i]] == "United States Senate") {
+      
+const repInfoHTML = (
+ 
 
-  if (!officials) officials = 'undefined';
 
-  //we'll use the variables above to 
-  //present the information we got 
-
-  const repInfoHTML = ( 
-
- `<row class="reps">
+`
    <div class ="rep col-4">
-
-     <h2 class='js-search-results'>${officials[2]["name"]}</h2>
-     <h2>${offices[2]["name"]}</h2>
-     <h3 class = "contact-info">Info: <br>
+     <section class ="name-box1">
+       <h2 class='js-search-results'>${officials[2]["name"]}</h2>
+       <h2>${offices[2]["name"]}</h2><br>
+     </section>
+     <section class ="info-box">
        Party: ${officials[2]["party"]}<br>
        Phone: ${officials[2]["phones"]}<br>
        Website: ${officials[2]["urls"]}<br>
-     
-     <h3 class = "videos"> Recent YouTube Videos</h3>
-   </div>
-   <div class="rep col-4">
-     <h2 class='js-search-results'>${officials[3]["name"]}</h2>
-     <h2>${offices[2]["name"]}</h2>
-     <h3 class = "contact-info">Info: <br>
-       Party: ${officials[3]["party"]}<br>
-       Phone: ${officials[3]["phones"]}<br>
-       Website: ${officials[3]["urls"]}<br>
-     <h3 class = "videos"> Recent YouTube Videos</h3>
-   </div>
-   <div class ="rep col-4">
-     <h2 class='js-search-results'>${officials[4]["name"]}</h2>
-     <h2>${offices[3]["name"]}</h2>
-      <h3 class = "contact-info">Info: <br>
-       Party: ${officials[4]["party"]}<br>
-       Phone: ${officials[4]["phones"]}<br>
-       Website: ${officials[4]["urls"]}<br>
+     </section>
+     <section class = "Tweets">Recent Tweets<br>
+     </section>
+   </div>  
+  
+`);   
     
-     <h3 class = "videos"> Recent YouTube Videos</h3>
-   </div>
-  </row>
- `);   
-    
-//tehn empty the output region
+//then empty the output region
 // and append our profile info
 
 outputResults
-  .empty()
+  
   .append(repInfoHTML)
-}
+  }
+ // }
 
 
-function showErr(err) {
-   const outputResults = $('js-search-results');
-   const {status } = err;
+ function showErr(err) {
+    const outputResults = $('row.reps');
+    const {status } = err;
 
    console.log (err)
 
-   let errMsg;
-  if (status === 404) {
-   errMsg = `We couldn't find that address!`
-  }
-  if (status === 503) {
-    errMsg = `We couldn't reach the database's servers!`
-  }
-    const errHTML = (
-    `<div class="error"">
+    let errMsg;
+   if (status === 404) {
+    errMsg = `We couldn't find that zipcode!`
+ }
+if (status === 503) {
+ errMsg = `We couldn't reach the database's servers!`
+ }
+const errHTML = (
+  `<div class="error"">
       <p>${errMsg}<p>
-    </div>`
-    );
+     </div>`
+     );
     
-    outputResults
-      .empty()
-      .append(errHTML)
-      .prop('hidden', false);
-}
+     outputResults
+     .empty()
+     .append(errHTML)
+     .prop('hidden', false);
+ }
 
 $(handleForm);
 
