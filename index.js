@@ -1,4 +1,4 @@
-'use strict';
+ //'use strict';
 
 const CONGRESSPERSON_SEARCH_URL = 'https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDmy5GqaG7XhLaYLbAUuoUqO4DRFT_Lgz4&address=';
 
@@ -34,58 +34,65 @@ function fetchData(baseURL, zipcode) {
 
   //try to get some JSON
   //and show something to the user.
-  $.getJSON(url, showRepInfo)
+   $.getJSON(url, showRepInfo)
 // ... and show an error if we can't 
   .fail(showErr);
-}
-
- 
+} 
 
 function showRepInfo(repData) {
   // store the element we'll be appending to
   const outputResults= $('row.reps');
-  
+  //then empty the output region
  outputResults
  .empty()
    //store the parts we want from the data
   //using object destructuring
   let {officials, offices} = repData;
-  //Party: ${officials[2]["party"]}<br>
+  
+ //iterate over the array of offices to find the senators and house reps
 
   
-   //for (let i = 0; i <=offices.length; i++) 
-  // //  let currentOffice = ${offices[i]["name"]}
-  // if (offices[name[i]] == "United States Senate") {
-      
-const repInfoHTML = (
+  for (i = 1; i <=offices.length; i++) {
+ // let currentOffice = $offices[i]["name"];
+  if (offices[name[i]] == "United States Senate") 
+// just do Senators - until we have a working app and then figure out partial strings for the reps
+//    || (offices[names[i]] == "PARTIAL string")
  
+ // iterate over type to get the twitter handle
 
+for (k=0; k <= channels.length; k++) {
+  if (channels[type[k]] == "twitter"){
+     twitterHandle = (channels[id])
+  }
+}
+  
+ 
+const repInfoHTML = (
 
-`
-   <div class ="rep col-4">
+`<div class ="rep col-4">
      <section class ="name-box1">
-       <h2 class='js-search-results'>${officials[2]["name"]}</h2>
-       <h2>${offices[2]["name"]}</h2><br>
+       <h2 class='js-search-results'>${officials[i]["name"]}</h2>
+       <h2>${offices[name[i]]}</h2><br>
      </section>
      <section class ="info-box">
-       Party: ${officials[2]["party"]}<br>
-       Phone: ${officials[2]["phones"]}<br>
-       Website: ${officials[2]["urls"]}<br>
+       Party: ${officials[i]["party"]}<br>
+       Phone: ${officials[i]["phones"]}<br>
+       Website: ${officials[i]["urls"]}<br>
      </section>
-     <section class = "Tweets">Recent Tweets<br>
+     <section class="tweets">
+     <a class = "twitter-timeline" href="https://twitter.com/twitterHandle"> Tweets by twitterHandle</a>
      </section>
-   </div>  
-  
+   </div>    
 `);   
-    
-//then empty the output region
+   
+
 // and append our profile info
 
-outputResults
+   outputResults
   
   .append(repInfoHTML)
-  }
- // }
+}
+} 
 
 
  function showErr(err) {
