@@ -53,8 +53,10 @@ function showRepInfo(repData) {
 
   
   for (i = 1; i <=offices.length; i++) {
- // let currentOffice = $offices[i]["name"];
-  if (offices[name[i]] == "United States Senate") 
+ // let currentOffice = $offices[i]["name
+
+// we actually need the index of this
+   if (offices[name[i]] == "United States Senate") 
 // just do Senators - until we have a working app and then figure out partial strings for the reps
 //    || (offices[names[i]] == "PARTIAL string")
  
@@ -70,6 +72,9 @@ for (k=0; k <= channels.length; k++) {
 const repInfoHTML = (
 
 `<div class ="rep col-4">
+     <section class="image">
+       <img src="${officials[i]['photoUrl']}">
+     </section>
      <section class ="name-box1">
        <h2 class='js-search-results'>${officials[i]["name"]}</h2>
        <h2>${offices[name[i]]}</h2><br>
@@ -90,8 +95,9 @@ const repInfoHTML = (
 
    outputResults
   
-  .append(repInfoHTML)
-}
+  .append(repInfoHTML) 
+
+  }
 } 
 
 
@@ -103,14 +109,14 @@ const repInfoHTML = (
 
     let errMsg;
    if (status === 404) {
-    errMsg = `We couldn't find that zipcode!`
+    errMsg = `We couldn't find that zipcode`
  }
 if (status === 503) {
  errMsg = `We couldn't reach the database's servers!`
  }
 const errHTML = (
   `<div class="error"">
-      <p>${errMsg}<p>
+      <p>${errMsg}. Please enter a valid 5-digit zipcode!<p>
      </div>`
      );
     
@@ -121,5 +127,3 @@ const errHTML = (
  }
 
 $(handleForm);
-
-
