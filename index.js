@@ -82,7 +82,7 @@ const repInfoHTML = (
      <section class ="info-box">
        Party: ${officials[i]["party"]}<br>
        Phone: ${officials[i]["phones"]}<br>
-       Website: ${officials[i]["urls"]}<br>
+       <a href ='${officials[i]["urls"]}'>Visit the website</a>
      </section>
      <section class="tweets">
      <a class = "twitter-timeline" href="https://twitter.com/twitterHandle"> Tweets by twitterHandle</a>
